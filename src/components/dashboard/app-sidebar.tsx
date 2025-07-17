@@ -142,7 +142,7 @@ export function AppSidebar() {
             </SidebarGroupContent>
           </SidebarGroup>
 
-          <AppSidebarConversations />
+          {/* <AppSidebarConversations /> */}
           <AppSidebarAutomations />
         </SidebarContent>
       </SidebarContent>

@@ -368,11 +368,11 @@ export function AccountContent() {
           </section>
 
           {/* Referrals */}
-          <ReferralSection
+          {/* <ReferralSection
             referralCode={user?.referralCode}
             referringUserId={user?.referringUserId}
             handleUpdateReferralCode={handleUpdateReferralCode}
-          />
+          /> */}
 
           {/* Connected Accounts Section */}
           <section className="space-y-4">
