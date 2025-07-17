@@ -15,8 +15,8 @@ export default function Logo({
 }) {
   return (
     <DynamicImage
-      lightSrc="/letter.svg"
-      darkSrc="/letter_w.svg"
+      lightSrc="/logo.png"
+      darkSrc="/logo.png"
       alt="Logo"
       width={width}
       height={height}
@@ -34,7 +34,7 @@ export function Brand({ className }: BrandProps) {
     <Link href="/" className={className}>
       <div className="flex items-center gap-2">
         <Logo width={32} />
-        <span className="text-x select-none font-bold">Neur</span>
+        <span className="text-x select-none font-bold">Dara</span>
       </div>
     </Link>
   );

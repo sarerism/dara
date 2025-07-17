@@ -151,7 +151,7 @@ const Hero = ({ handleLogin }: { handleLogin: () => void }) => {
           <BlurFade delay={0.3} className="pointer-events-none select-none">
             <div className="inline-flex items-center rounded-full border border-primary/20 bg-muted/80 px-4 py-1.5 shadow-lg backdrop-blur-sm">
               <span className="text-sm font-medium text-primary">
-                ✨ Introducing Neur Agent
+                ✨ Introducing Dara Agent
               </span>
             </div>
 
@@ -357,7 +357,7 @@ const Footer = () => {
         delay={0.5}
         className="flex items-center justify-center gap-3 text-sm text-muted-foreground"
       >
-        <p>© 2024 Neur. All rights reserved.</p>
+        <p>© 2024 Dara. All rights reserved.</p>
         <span>|</span>
         <Link
           href="https://x.com/neur_sh"
