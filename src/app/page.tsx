@@ -17,6 +17,11 @@ import {
   LinkIcon,
   ShieldIcon,
   ZapIcon,
+  ArrowRightIcon,
+  CheckCircleIcon,
+  StarIcon,
+  UsersIcon,
+  SparklesIcon,
 } from 'lucide-react';
 
 import { Brand } from '@/components/logo';
@@ -42,9 +47,9 @@ const Header = ({ handleLogin }: { handleLogin: () => void }) => {
   return (
     <BlurFade delay={0.1} className="relative z-50">
       <header className="fixed left-0 right-0 top-0">
-        <div className="mx-auto max-w-6xl px-4 py-4">
-          <div className="rounded-xl border border-border/50 bg-muted/70 shadow-lg backdrop-blur-md">
-            <div className="flex items-center justify-between px-4 py-2">
+        <div className="mx-auto max-w-7xl px-4 py-4">
+          <div className="rounded-xl border border-border/50 bg-background/80 shadow-lg backdrop-blur-md">
+            <div className="flex items-center justify-between px-6 py-3">
               <div className="relative">
                 <Brand className="scale-95 transition-opacity hover:opacity-80" />
               </div>
@@ -58,7 +63,7 @@ const Header = ({ handleLogin }: { handleLogin: () => void }) => {
                       href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group relative flex items-center gap-1.5 px-4 py-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+                      className="group relative flex items-center gap-2 px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
                     >
                       <Icon className="h-4 w-4" />
                       {item.label}
@@ -71,16 +76,16 @@ const Header = ({ handleLogin }: { handleLogin: () => void }) => {
               <div className="flex items-center gap-3">
                 <Button
                   variant="outline"
-                  className="h-9 rounded-lg px-4 text-sm transition-colors hover:bg-primary hover:text-primary-foreground"
+                  className="h-10 rounded-lg px-6 text-sm font-medium transition-all duration-200 hover:bg-primary hover:text-primary-foreground hover:shadow-lg"
                   onClick={handleLogin}
                 >
-                  Login
+                  Get Started
                 </Button>
 
                 <Button
                   variant="ghost"
                   size="icon"
-                  className="h-9 w-9 md:hidden"
+                  className="h-10 w-10 md:hidden"
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 >
                   <svg
@@ -93,7 +98,7 @@ const Header = ({ handleLogin }: { handleLogin: () => void }) => {
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    className="h-4 w-4"
+                    className="h-5 w-5"
                   >
                     <line x1="4" x2="20" y1="12" y2="12" />
                     <line x1="4" x2="20" y1="6" y2="6" />
@@ -105,8 +110,8 @@ const Header = ({ handleLogin }: { handleLogin: () => void }) => {
           </div>
 
           {isMobileMenuOpen && (
-            <div className="absolute left-4 right-4 top-full mt-2 rounded-lg border border-border/50 bg-background/95 p-3 shadow-lg backdrop-blur-md md:hidden">
-              <nav className="flex flex-col gap-1.5">
+            <div className="absolute left-4 right-4 top-full mt-2 rounded-lg border border-border/50 bg-background/95 p-4 shadow-lg backdrop-blur-md md:hidden">
+              <nav className="flex flex-col gap-2">
                 {navItems.map((item) => {
                   const Icon = item.icon;
                   return (
@@ -115,7 +120,7 @@ const Header = ({ handleLogin }: { handleLogin: () => void }) => {
                       href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-primary/5 hover:text-primary"
+                      className="flex items-center gap-3 rounded-md px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-primary/5 hover:text-primary"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       <Icon className="h-4 w-4" />
@@ -144,116 +149,208 @@ const Hero = ({ handleLogin }: { handleLogin: () => void }) => {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [0.6, 1]);
 
   return (
-    <section className="relative pt-[5.75rem]" ref={productRef}>
+    <section className="relative pt-[6rem]" ref={productRef}>
       {/* Content */}
-      <div className="relative mx-auto max-w-screen-xl px-6 pb-6 pt-12 text-center md:pb-8 md:pt-16">
-        <div className="mx-auto max-w-3xl">
+      <div className="relative mx-auto max-w-screen-xl px-6 pb-12 pt-16 text-center md:pb-16 md:pt-24">
+        <div className="mx-auto max-w-4xl">
           <BlurFade delay={0.3} className="pointer-events-none select-none">
-            <div className="inline-flex items-center rounded-full border border-primary/20 bg-muted/80 px-4 py-1.5 shadow-lg backdrop-blur-sm">
-              <span className="text-sm font-medium text-primary">
-                ✨ Introducing Dara Agent
+            <div className="inline-flex items-center rounded-full border border-primary/20 bg-primary/5 px-6 py-2 shadow-lg backdrop-blur-sm">
+              <SparklesIcon className="mr-2 h-4 w-4 text-primary" />
+              <span className="text-sm font-semibold text-primary">
+                Introducing Dara Agent
               </span>
             </div>
 
-            <h1 className="mt-6 text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl">
+            <h1 className="mt-8 text-5xl font-bold tracking-tight md:text-6xl lg:text-7xl">
               The{' '}
               <AnimatedShinyText className="inline">
                 <span>Intelligent Copilot</span>
               </AnimatedShinyText>{' '}
-              for <span>Solana</span>
+              for <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Solana</span>
             </h1>
 
-            <p className="mt-4 text-lg text-muted-foreground">
-              Elevate your Solana experience with AI-powered insights and
-              delegated actions
+            <p className="mt-6 text-xl text-muted-foreground md:text-2xl">
+              Elevate your Solana experience with AI-powered insights, automated trading, and intelligent portfolio management
             </p>
           </BlurFade>
 
           <BlurFade delay={0.4}>
-            <div className="mt-8">
+            <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
               <RainbowButton
                 onClick={handleLogin}
-                className="h-12 min-w-[180px] text-base transition-all duration-300 hover:scale-105"
+                className="h-14 min-w-[200px] text-lg font-semibold transition-all duration-300 hover:scale-105"
               >
-                Getting Started
+                Start Building
+                <ArrowRightIcon className="ml-2 h-5 w-5" />
               </RainbowButton>
+              
+              <Button
+                variant="outline"
+                className="h-14 px-8 text-lg font-medium transition-all duration-200 hover:bg-primary/5"
+              >
+                View Demo
+              </Button>
+            </div>
+          </BlurFade>
+
+          {/* Social Proof */}
+          <BlurFade delay={0.5}>
+            <div className="mt-12 flex items-center justify-center gap-8 text-sm text-muted-foreground">
+              <div className="flex items-center gap-2">
+                <UsersIcon className="h-4 w-4" />
+                <span>10,000+ Users</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <StarIcon className="h-4 w-4 text-yellow-500" />
+                <span>4.9/5 Rating</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircleIcon className="h-4 w-4 text-green-500" />
+                <span>99.9% Uptime</span>
+              </div>
             </div>
           </BlurFade>
         </div>
       </div>
-
-      {/* Product Preview */}
-      {/* <div className="relative w-full">
-        <BlurFade delay={0.6} className="mx-auto max-w-screen-2xl px-6">
-          <div className="relative">
-            ... (product screenshot and decorative elements)
-          </div>
-        </BlurFade>
-      </div> */}
     </section>
   );
 };
 
-const features = [
-  // Only keep 'Comprehensive Ecosystem Integration'
-  {
-    Icon: LinkIcon,
-    name: 'Comprehensive Ecosystem Integration',
-    description:
-      "Effortlessly connect with the full spectrum of Solana's protocols and services. Our platform is designed for seamless AI-powered collaboration, ensuring full synergy with the ecosystem.",
-    className: 'col-span-1 sm:col-span-3 lg:col-span-3',
-    background: <IntegrationsBackground />,
-  },
-];
+const ValueProps = () => {
+  const valueProps = [
+    {
+      icon: BrainCircuitIcon,
+      title: "AI-Powered Insights",
+      description: "Get intelligent recommendations and market analysis powered by advanced AI models"
+    },
+    {
+      icon: ZapIcon,
+      title: "Lightning Fast",
+      description: "Execute trades and manage your portfolio with sub-second response times"
+    },
+    {
+      icon: ShieldIcon,
+      title: "Secure & Reliable",
+      description: "Enterprise-grade security with multi-signature support and audit trails"
+    }
+  ];
+
+  return (
+    <section className="py-20">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
+            Why Choose Dara?
+          </h2>
+          <p className="mt-4 text-lg text-muted-foreground">
+            Built for the modern Solana ecosystem
+          </p>
+        </div>
+        
+        <div className="grid gap-8 md:grid-cols-3">
+          {valueProps.map((prop, index) => {
+            const Icon = prop.icon;
+            return (
+              <BlurFade key={index} delay={0.2 + index * 0.1}>
+                <div className="group rounded-2xl border border-border/50 bg-card p-8 transition-all duration-300 hover:border-primary/50 hover:shadow-lg">
+                  <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                    <Icon className="h-7 w-7" />
+                  </div>
+                  <h3 className="mb-3 text-xl font-semibold">{prop.title}</h3>
+                  <p className="text-muted-foreground">{prop.description}</p>
+                </div>
+              </BlurFade>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+};
 
 const Features = () => {
   return (
-    <BlurFade delay={0.5} className="relative py-16 sm:py-24">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="mb-12 text-center sm:mb-16">
-          <h2 className="mb-3 text-2xl font-bold tracking-tight sm:mb-4 sm:text-4xl">
+    <BlurFade delay={0.5} className="relative py-20">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="mb-16 text-center">
+          <h2 className="mb-4 text-3xl font-bold tracking-tight md:text-4xl">
             Tailored for Solana
           </h2>
-          <p className="text-sm text-muted-foreground sm:text-base">
+          <p className="text-lg text-muted-foreground">
             Seamless integration with the world&apos;s leading AI-models
           </p>
         </div>
-
-        <BentoGrid className="grid-rows-[auto]">
-          {features.map((feature, idx) => (
-            <BentoCard
-              key={idx}
-              {...feature}
-              className={cn(
-                'group relative overflow-hidden rounded-2xl border bg-card p-4 shadow-lg transition-all hover:shadow-xl sm:rounded-3xl sm:p-6',
-                feature.className,
-              )}
-            />
-          ))}
-        </BentoGrid>
+        
+        <div className="flex justify-center">
+          <div className="relative h-[400px] w-full max-w-3xl">
+            <IntegrationsBackground />
+          </div>
+        </div>
       </div>
     </BlurFade>
   );
 };
 
+const CTA = ({ handleLogin }: { handleLogin: () => void }) => {
+  return (
+    <section className="py-20">
+      <div className="mx-auto max-w-4xl px-6 text-center">
+        <BlurFade delay={0.3}>
+          <h2 className="mb-6 text-3xl font-bold tracking-tight md:text-4xl">
+            Ready to Transform Your Solana Experience?
+          </h2>
+          <p className="mb-8 text-lg text-muted-foreground">
+            Join thousands of users who are already leveraging AI to maximize their Solana potential
+          </p>
+          <RainbowButton
+            onClick={handleLogin}
+            className="h-14 min-w-[200px] text-lg font-semibold transition-all duration-300 hover:scale-105"
+          >
+            Get Started Free
+            <ArrowRightIcon className="ml-2 h-5 w-5" />
+          </RainbowButton>
+        </BlurFade>
+      </div>
+    </section>
+  );
+};
+
 const Footer = () => {
   return (
-    <footer className="mt-auto py-4">
-      <BlurFade
-        delay={0.5}
-        className="flex items-center justify-center gap-3 text-sm text-muted-foreground"
-      >
-        <p>© 2024 Dara. All rights reserved.</p>
-        <span>|</span>
-        <Link
-          href="https://x.com/neur_sh"
-          target="_blank"
-          title="Follow us on X"
-          className="transition-colors hover:scale-105 hover:text-primary"
-        >
-          <RiTwitterXFill className="h-4 w-4" />
-        </Link>
-      </BlurFade>
+    <footer className="border-t border-border/50 bg-muted/30">
+      <div className="mx-auto max-w-4xl px-6 py-2">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Brand />
+            <p className="text-sm text-muted-foreground">
+              The intelligent copilot for Solana
+            </p>
+          </div>
+          
+          <div className="flex items-center gap-3">
+            <Link
+              href="https://x.com/neur_sh"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-lg p-2 text-muted-foreground transition-all duration-200 hover:bg-primary/10 hover:text-primary hover:scale-110"
+            >
+              <RiTwitterXFill className="h-5 w-5" />
+            </Link>
+            <Link
+              href="https://git.new/neur"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-lg p-2 text-muted-foreground transition-all duration-200 hover:bg-primary/10 hover:text-primary hover:scale-110"
+            >
+              <GitHubLogoIcon className="h-5 w-5" />
+            </Link>
+          </div>
+        </div>
+        
+        <div className="mt-2 border-t border-border/50 pt-2 text-center text-sm text-muted-foreground">
+          <p>© 2024 Dara. All rights reserved.</p>
+        </div>
+      </div>
     </footer>
   );
 };
@@ -285,7 +382,9 @@ export default function Home() {
       <Header handleLogin={login} />
       <main className="flex-1">
         <Hero handleLogin={login} />
+        <ValueProps />
         <Features />
+        <CTA handleLogin={login} />
       </main>
       <Footer />
     </div>

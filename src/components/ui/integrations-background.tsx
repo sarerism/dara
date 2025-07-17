@@ -24,7 +24,7 @@ export const IntegrationsBackground = () => {
       className="absolute inset-0 flex items-center justify-end pr-12"
       ref={containerRef}
     >
-      <div className="flex size-full max-h-[180px] max-w-[300px] flex-col items-stretch justify-between gap-6">
+      <div className="flex size-full flex-col items-stretch justify-between gap-6">
         <div className="flex flex-row items-center justify-between">
           <Circle
             ref={div1Ref}
@@ -63,9 +63,9 @@ export const IntegrationsBackground = () => {
           </Circle>
           <Circle
             ref={div4Ref}
-            className="size-14 transition-transform hover:scale-110"
+            className="size-24 transition-transform hover:scale-110"
           >
-            <div className="size-8">
+            <div className="size-16">
               <Logo />
             </div>
           </Circle>
