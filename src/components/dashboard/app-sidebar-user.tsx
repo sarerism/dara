@@ -87,7 +87,7 @@ export const AppSidebarUser = () => {
             <DropdownMenuGroup>
               {/* Follow us on X */}
               <DropdownMenuItem
-                onClick={() => window.open('https://x.com/neur_sh', '_blank')}
+                onClick={() => window.open('https://x.com/ask_Dara', '_blank')}
               >
                 <RiTwitterXFill className="mr-2 h-4 w-4" />
                 Follow us on X
@@ -103,7 +103,7 @@ export const AppSidebarUser = () => {
 
               {/* Docs */}
               <DropdownMenuItem
-                onClick={() => window.open('https://docs.neur.studio', '_blank')}
+                onClick={() => window.open('https://docs.dara.sh', '_blank')}
               >
                 <BookOpen className="mr-2 h-4 w-4" />
                 Docs

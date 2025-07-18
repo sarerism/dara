@@ -82,8 +82,13 @@ export const getJupiterTokenPrice = cache(
     showExtraInfo: boolean = true,
   ): Promise<TokenPrice | null> => {
     try {
+      // Use Jupiter quote API to get price information
+      // We'll get the price by quoting a swap from the token to USDC
+      const usdcMint = 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v'; // USDC mint address
+      const amount = '1000000000'; // 1 SOL in lamports (for SOL) or equivalent for other tokens
+      
       const response = await fetch(
-        `https://api.jup.ag/price/v2?ids=${tokenAddress}&showExtraInfo=${showExtraInfo}`,
+        `https://quote-api.jup.ag/v6/quote?inputMint=${tokenAddress}&outputMint=${usdcMint}&amount=${amount}&slippageBps=50`,
         {
           next: {
             revalidate: 5, // Cache for 5 seconds
@@ -95,8 +100,18 @@ export const getJupiterTokenPrice = cache(
         throw new Error('Failed to fetch price data');
       }
 
-      const data = (await response.json()) as TokenPriceResponse;
-      return data.data[tokenAddress] || null;
+      const data = await response.json();
+      
+      // Calculate the price per token
+      const inAmount = parseFloat(data.inAmount);
+      const swapUsdValue = parseFloat(data.swapUsdValue);
+      const pricePerToken = swapUsdValue / (inAmount / Math.pow(10, 9)); // Assuming 9 decimals for most tokens
+      
+      return {
+        id: tokenAddress,
+        type: 'price',
+        price: pricePerToken.toString(),
+      };
     } catch (error) {
       console.error('Error fetching Jupiter token price:', error);
       return null;

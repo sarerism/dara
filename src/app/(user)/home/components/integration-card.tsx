@@ -10,11 +10,6 @@ interface IntegrationCardProps {
   onClick?: () => void;
 }
 
-interface IntegrationCardStyles extends React.CSSProperties {
-  '--integration-primary': string;
-  '--integration-secondary': string;
-}
-
 export function IntegrationCard({
   item,
   index,
@@ -22,34 +17,28 @@ export function IntegrationCard({
 }: IntegrationCardProps) {
   return (
     <motion.button
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: index * 0.1 }}
       whileHover={{
-        scale: 1.01,
+        y: -4,
         transition: { duration: 0.2 },
       }}
       whileTap={{
-        scale: 0.99,
+        scale: 0.98,
         transition: { duration: 0.1 },
       }}
       onClick={onClick}
-      className="group relative flex w-full items-center gap-3 overflow-hidden rounded-xl bg-muted 
-        p-4 transition-all duration-200"
-      style={
-        {
-          '--integration-primary': item.theme.primary,
-          '--integration-secondary': item.theme.secondary,
-        } as IntegrationCardStyles
-      }
+      className="group relative flex w-full items-center gap-4 overflow-hidden rounded-xl border border-border/50 
+        bg-card/50 p-5 transition-all duration-300 hover:border-primary/30 hover:bg-primary/5 hover:shadow-lg"
     >
       <motion.div
         initial={false}
         whileHover={{
-          scale: 1.05,
+          scale: 1.1,
           transition: { type: 'spring', stiffness: 300, damping: 20 },
         }}
-        className="relative z-10 flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-lg"
+        className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-border/50"
         style={{
           background: `linear-gradient(135deg, ${item.theme.primary}15, ${item.theme.secondary}10)`,
         }}
@@ -57,22 +46,22 @@ export function IntegrationCard({
         <Image
           src={item.icon}
           alt={item.label}
-          width={24}
-          height={24}
-          className="z-10 transition-transform duration-300 group-hover:scale-105"
+          width={28}
+          height={28}
+          className="z-10 transition-transform duration-300 group-hover:scale-110"
         />
       </motion.div>
 
-      <div className="z-10 flex-1 space-y-0.5 text-left">
+      <div className="z-10 flex-1 space-y-1 text-left">
         <motion.div
-          className="text-sm font-medium transition-colors duration-300"
+          className="text-base font-semibold text-foreground transition-colors duration-300 group-hover:text-primary"
           initial={false}
         >
           {item.label}
         </motion.div>
         {item.description && (
           <motion.div
-            className="line-clamp-1 text-xs text-muted-foreground/70"
+            className="line-clamp-1 text-sm text-muted-foreground/80 group-hover:text-muted-foreground transition-colors"
             initial={false}
           >
             {item.description}
@@ -82,9 +71,9 @@ export function IntegrationCard({
 
       {/* Theme color overlay on hover */}
       <div
-        className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/5 to-primary/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
         style={{
-          background: `linear-gradient(135deg, ${item.theme.primary}10, ${item.theme.secondary}05)`,
+          background: `linear-gradient(135deg, ${item.theme.primary}05, ${item.theme.secondary}03)`,
         }}
       />
     </motion.button>

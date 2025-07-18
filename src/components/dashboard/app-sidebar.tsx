@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { BookOpen, Bookmark, Brain, HomeIcon } from 'lucide-react';
+import Image from 'next/image';
 
 import { ThemeToggle } from '@/components/theme-toggle';
 import {
@@ -67,7 +68,7 @@ const ExploreItems = [
   },
   {
     title: 'Docs',
-    url: 'https://docs.neur.sh',
+    url: 'https://docs.dara.sh',
     segment: 'docs',
     icon: BookOpen,
     external: true,

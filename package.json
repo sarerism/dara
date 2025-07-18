@@ -1,6 +1,6 @@
 {
   "name": "dara-app",
-  "version": "0.3.4",
+  "version": "0.4.7",
   "private": true,
   "scripts": {
     "vercel-build": "NODE_OPTIONS=--max_old_space_size=2048 pnpm npx prisma generate && next build",

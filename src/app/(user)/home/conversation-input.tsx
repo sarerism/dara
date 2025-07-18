@@ -256,7 +256,7 @@ export function ConversationInput({
     <div
       className={`relative ${!onChat ? 'duration-500 animate-in fade-in slide-in-from-bottom-4' : ''}`}
     >
-      <div className="relative rounded-xl bg-muted">
+      <div className="relative overflow-hidden rounded-xl border border-border/50 bg-card/50 shadow-lg backdrop-blur-sm">
         <form onSubmit={handleSubmit} className="flex flex-col">
           {onChat && (
             <SavedPromptsMenu
@@ -269,7 +269,7 @@ export function ConversationInput({
             />
           )}
           {attachments.length > 0 && (
-            <div className="flex gap-2 overflow-x-auto rounded-t-xl bg-muted/50 p-3">
+            <div className="flex gap-2 overflow-x-auto border-b border-border/50 bg-muted/30 p-3">
               {attachments.map((attachment) => (
                 <AttachmentPreview
                   key={attachment.localUrl}
@@ -291,22 +291,22 @@ export function ConversationInput({
               onChat ? 'Send a message...' : 'Start a new conversation...'
             }
             className={cn(
-              'min-h-[110px] max-h-[350px] overflow-y-scroll w-full resize-none border-0 bg-transparent px-4 py-3 text-base focus-visible:ring-0',
+              'min-h-[120px] max-h-[400px] overflow-y-scroll w-full resize-none border-0 bg-transparent px-6 py-4 text-base focus-visible:ring-0 placeholder:text-muted-foreground/60',
               attachments.length > 0 ? 'rounded-t-none' : 'rounded-t-xl',
             )}
           />
 
-          <div className="flex items-center justify-between border-t px-4 py-2">
+          <div className="flex items-center justify-between border-t border-border/50 bg-muted/20 px-6 py-3">
             <div className="flex w-full flex-row items-center justify-between">
-              <span className="text-xs text-muted-foreground">
+              <span className="text-xs text-muted-foreground/80">
                 Type / to search for saved prompts (e.g. /Solana Price...)
               </span>
-              <span className="text-xs text-muted-foreground">
+              <span className="text-xs text-muted-foreground/80">
                 {value.length}/{MAX_CHARS}
               </span>
             </div>
 
-            <div className="flex">
+            <div className="flex items-center gap-2">
               <input
                 ref={fileInputRef}
                 type="file"
@@ -320,10 +320,10 @@ export function ConversationInput({
                 type="button"
                 variant="ghost"
                 size="icon"
-                className="h-8 w-8 hover:bg-muted"
+                className="h-9 w-9 rounded-lg hover:bg-muted/50 transition-colors"
                 onClick={() => fileInputRef.current?.click()}
               >
-                <ImageIcon className="h-5 w-5" />
+                <ImageIcon className="h-4 w-4" />
               </Button>
 
               <Button
@@ -334,9 +334,9 @@ export function ConversationInput({
                   (!value.trim() && attachments.length === 0) ||
                   attachments.some((att) => att.uploading)
                 }
-                className="group relative flex h-8 w-8 items-center justify-center rounded-lg 
+                className="group relative flex h-9 w-9 items-center justify-center rounded-lg 
                   transition-all duration-200 ease-in-out
-                  hover:bg-primary hover:text-primary-foreground 
+                  hover:bg-primary hover:text-primary-foreground hover:shadow-md
                   active:scale-95 disabled:cursor-not-allowed disabled:opacity-50"
               >
                 <SendHorizontal className="h-4 w-4 transition-transform duration-200 ease-out group-hover:scale-110" />

@@ -23,14 +23,25 @@ export async function dbGetConversation({
   isServer?: boolean;
 }) {
   try {
-    // Mark conversation as read if user is fetching
+    // Mark conversation as read if user is fetching and conversation exists
     if (!isServer) {
+      // First check if the conversation exists
+      const existingConversation = await prisma.conversation.findUnique({
+        where: { id: conversationId },
+      });
+
+      if (!existingConversation) {
+        return null;
+      }
+
+      // Update the conversation's lastReadAt
       return await prisma.conversation.update({
         where: { id: conversationId },
         data: { lastReadAt: new Date() },
         include: includeMessages ? { messages: true } : undefined,
       });
     } else {
+      // For server-side requests, just find the conversation
       return await prisma.conversation.findUnique({
         where: { id: conversationId },
         include: includeMessages ? { messages: true } : undefined,
@@ -156,13 +167,20 @@ export async function dbGetConversationMessages({
   isServer?: boolean;
 }) {
   try {
-    // Mark conversation as read if user is fetching
+    // Mark conversation as read if user is fetching and conversation exists
     if (!isServer) {
       console.log('Marking conversation as read', conversationId);
-      await prisma.conversation.update({
+      // Check if conversation exists before updating
+      const conversation = await prisma.conversation.findUnique({
         where: { id: conversationId },
-        data: { lastReadAt: new Date() },
       });
+      
+      if (conversation) {
+        await prisma.conversation.update({
+          where: { id: conversationId },
+          data: { lastReadAt: new Date() },
+        });
+      }
     }
 
     const messages = await prisma.message.findMany({

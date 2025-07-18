@@ -8,7 +8,7 @@ import { PrivyInterface, usePrivy } from '@privy-io/react-auth';
 import useSWR from 'swr';
 
 import { debugLog } from '@/lib/debug';
-import { getUserData } from '@/server/actions/user';
+import { getUserData, setAuthCookie } from '@/server/actions/user';
 import { NeurUser, PrismaUser, PrivyUser } from '@/types/db';
 
 /**
@@ -154,6 +154,24 @@ export function useUser(): NeurUserInterface {
         module: 'useUser',
         level: 'info',
       });
+      
+      // Set the auth cookie for server-side authentication
+      try {
+        const token = await privyRest.getAccessToken();
+        if (token) {
+          await setAuthCookie({ token });
+          debugLog('Auth cookie set successfully', null, {
+            module: 'useUser',
+            level: 'info',
+          });
+        }
+      } catch (error) {
+        debugLog('Failed to set auth cookie', error, {
+          module: 'useUser',
+          level: 'error',
+        });
+      }
+      
       const neurUser = await fetchNeurUserData(privyUser as PrivyUser);
       debugLog('Merged NeurUser data', neurUser, {
         module: 'useUser',
@@ -166,7 +184,7 @@ export function useUser(): NeurUserInterface {
       level: 'warn',
     });
     return null;
-  }, [ready, privyUser]);
+  }, [ready, privyUser, privyRest]);
 
   // Use SWR for data fetching and state management
   const { data: neurUser, isValidating: swrLoading } = useSWR<NeurUser | null>(

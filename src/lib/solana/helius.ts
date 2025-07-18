@@ -103,9 +103,9 @@ export const searchWalletAssets: (walletAddress: string) => Promise<{
       ownerAddress: ownerAddress,
       tokenType: 'all',
       displayOptions: {
-        showNativeBalance: true,
         showInscription: false,
         showCollectionMetadata: false,
+        showFungible: true,
       },
     });
 
@@ -181,9 +181,21 @@ export const searchWalletAssets: (walletAddress: string) => Promise<{
         !['FungibleToken', 'FungibleAsset'].includes(item.interface),
     );
 
-    // Calculate SOL balance from lamports
-    const solBalance = data.result.nativeBalance.lamports;
-    //console.log(data.result);
+    // Get SOL balance separately using getBalance
+    let solBalance = 0;
+    let solPriceInfo = { price_per_token: 0, total_price: 0, currency: '$' };
+    
+    try {
+      solBalance = await getBalance(ownerAddress);
+      // For now, we'll use a placeholder price. In a real app, you'd fetch SOL price from a price API
+      solPriceInfo = {
+        price_per_token: 0, // You can fetch this from a price API
+        total_price: 0,
+        currency: '$',
+      };
+    } catch (error) {
+      console.warn('Failed to get SOL balance:', error);
+    }
 
     // Create SOL token object
     const solToken = {
@@ -236,7 +248,7 @@ export const searchWalletAssets: (walletAddress: string) => Promise<{
         delegated: false,
         delegate: null,
         ownership_model: 'token',
-        owner: nonFungibleTokens[0]?.ownership.owner,
+        owner: ownerAddress,
       },
       supply: null,
       mutable: true,
@@ -249,11 +261,7 @@ export const searchWalletAssets: (walletAddress: string) => Promise<{
         decimals: 9,
         token_program: '',
         associated_token_address: '',
-        price_info: {
-          price_per_token: data.result.nativeBalance.price_per_sol,
-          total_price: data.result.nativeBalance.total_price,
-          currency: '',
-        },
+        price_info: solPriceInfo,
       },
     };
 

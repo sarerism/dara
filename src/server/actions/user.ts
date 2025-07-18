@@ -311,6 +311,25 @@ export const getPrivyClient = actionClient.action(
   async () => PRIVY_SERVER_CLIENT,
 );
 
+export const setAuthCookie = actionClient
+  .schema(z.object({ token: z.string() }))
+  .action(async ({ parsedInput: { token } }) => {
+    try {
+      const cookieStore = await cookies();
+      cookieStore.set('privy-token', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        path: '/',
+        maxAge: 60 * 60 * 24 * 7, // 7 days
+      });
+
+      return { success: true };
+    } catch (error) {
+      return { success: false, error: 'Failed to set auth cookie' };
+    }
+  });
+
 export type UserUpdateData = {
   degenMode?: boolean;
   referralCode?: string; // Add referralCode as an optional field

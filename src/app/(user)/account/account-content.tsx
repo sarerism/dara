@@ -308,28 +308,6 @@ export function AccountContent() {
                       </div>
                     </div>
                     <div>
-                      <Label className="text-xs text-muted-foreground">
-                        Early Access Program
-                      </Label>
-                      <div className="mt-1 flex h-8 items-center">
-                        <span className={cn('text-sm font-medium')}>
-                          {user?.earlyAccess ? 'Active' : 'Not Active'}
-                        </span>
-
-                        {!user?.earlyAccess && !IS_SUBSCRIPTION_ENABLED && (
-                          <div className="ml-auto">
-                            <Button
-                              variant="default"
-                              size="sm"
-                              onClick={() => router.push('/home')}
-                            >
-                              Get Early Access
-                            </Button>
-                          </div>
-                        )}
-                      </div>
-                    </div>
-                    <div>
                       <div className="flex items-center gap-1.5">
                         <Label className="text-xs text-muted-foreground">
                           Degen Mode

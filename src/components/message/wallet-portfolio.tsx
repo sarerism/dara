@@ -84,9 +84,9 @@ function TokenRow({
             </div>
             <div className="mt-1.5 flex items-baseline gap-2 text-xs sm:text-sm">
               <span className="font-medium text-muted-foreground">
-                {token.balance.toLocaleString(undefined, {
+                {token.balance ? token.balance.toLocaleString(undefined, {
                   maximumFractionDigits: 4,
-                })}{' '}
+                }) : '0'}{' '}
                 {token.symbol}
               </span>
             </div>
@@ -96,7 +96,7 @@ function TokenRow({
         {/* Price Info */}
         <div className="flex flex-col items-end gap-1.5">
           <div className="font-medium">
-            {formatNumber(token.balance * token.pricePerToken, 'currency')}
+            {formatNumber((token.balance || 0) * token.pricePerToken, 'currency')}
           </div>
           {hasPrice && (
             <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground sm:text-xs">

@@ -107,7 +107,7 @@ export function AiParticlesBackground() {
           color: 'transparent',
         },
       }}
-      className="absolute inset-0 h-full w-full"
+      className="absolute inset-0 h-full w-full pointer-events-none"
     />
   );
 }

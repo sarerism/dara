@@ -21,7 +21,27 @@ export async function generateMetadata({
   params: Promise<{ id: string }>;
 }): Promise<Metadata> {
   const { id } = await params;
-  const conversation = await dbGetConversation({ conversationId: id });
+  
+  // Retry mechanism to wait for conversation to be created
+  let conversation = null;
+  let attempts = 0;
+  const maxAttempts = 3;
+  const retryDelay = 300; // 300ms between attempts
+
+  while (attempts < maxAttempts) {
+    conversation = await dbGetConversation({ 
+      conversationId: id,
+      isServer: true 
+    });
+    
+    if (conversation) {
+      break;
+    }
+    
+    // Wait before retrying
+    await new Promise(resolve => setTimeout(resolve, retryDelay));
+    attempts++;
+  }
 
   if (!conversation) {
     return {
@@ -42,7 +62,24 @@ export async function generateMetadata({
  */
 async function ChatData({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const conversation = await dbGetConversation({ conversationId: id });
+  
+  // Retry mechanism to wait for conversation to be created
+  let conversation = null;
+  let attempts = 0;
+  const maxAttempts = 5;
+  const retryDelay = 500; // 500ms between attempts
+
+  while (attempts < maxAttempts) {
+    conversation = await dbGetConversation({ conversationId: id });
+    
+    if (conversation) {
+      break;
+    }
+    
+    // Wait before retrying
+    await new Promise(resolve => setTimeout(resolve, retryDelay));
+    attempts++;
+  }
 
   if (!conversation) {
     return notFound();

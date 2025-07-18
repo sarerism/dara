@@ -35,6 +35,7 @@ export async function GET(
   try {
     const messages = await dbGetConversationMessages({
       conversationId,
+      isServer: true,
     });
 
     if (!messages || messages.length === 0) {

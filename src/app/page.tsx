@@ -8,7 +8,7 @@ import { useRouter } from 'next/navigation';
 
 import { useLogin } from '@privy-io/react-auth';
 import { GitHubLogoIcon } from '@radix-ui/react-icons';
-import { RiTwitterXFill } from '@remixicon/react';
+import { RiTwitterFill } from '@remixicon/react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import {
   ActivityIcon,
@@ -37,8 +37,9 @@ import { RainbowButton } from '@/components/ui/rainbow-button';
 import { cn } from '@/lib/utils';
 
 const navItems = [
+  { label: 'Twitter', href: 'https://x.com/ask_Dara', icon: RiTwitterFill },
   { label: 'Github', href: 'https://git.new/neur', icon: GitHubLogoIcon },
-  { label: 'Docs', href: 'https://docs.neur.studio', icon: BookOpenIcon },
+  { label: 'Docs', href: 'https://docs.dara.sh', icon: BookOpenIcon },
 ];
 
 const Header = ({ handleLogin }: { handleLogin: () => void }) => {
@@ -187,8 +188,9 @@ const Hero = ({ handleLogin }: { handleLogin: () => void }) => {
               <Button
                 variant="outline"
                 className="h-14 px-8 text-lg font-medium transition-all duration-200 hover:bg-primary/5"
+                asChild
               >
-                View Demo
+                <Link href="/demo">View Demo</Link>
               </Button>
             </div>
           </BlurFade>
@@ -329,12 +331,12 @@ const Footer = () => {
           
           <div className="flex items-center gap-3">
             <Link
-              href="https://x.com/neur_sh"
+              href="https://x.com/ask_Dara"
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-lg p-2 text-muted-foreground transition-all duration-200 hover:bg-primary/10 hover:text-primary hover:scale-110"
             >
-              <RiTwitterXFill className="h-5 w-5" />
+              <RiTwitterFill className="h-5 w-5" />
             </Link>
             <Link
               href="https://git.new/neur"
@@ -372,7 +374,7 @@ export default function Home() {
 
   if (isMaintenanceMode) {
     login = () => {
-      window.location.href = 'https://x.com/neur_sh';
+      window.location.href = 'https://x.com/ask_Dara';
     };
   }
 

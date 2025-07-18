@@ -1,6 +1,4 @@
-import config from '../../package.json';
-
-export const APP_VERSION = config.version;
+export const APP_VERSION = "0.4.7";
 export const IS_BETA = true;
 
 export const RPC_URL =
